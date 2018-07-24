@@ -15,26 +15,20 @@ arrow_keys={
     'x1b[0':LEFT
     }
 
-
-register(
-    id='FrozenLake-v3',
-    entry_point='gym.envs.toy_text:FrozenLakeEnv',
-    kwargs={'map_name':'4x4','is_slippery':False}
-    )
-
-env=gym.make('FrozenLake-v3')
+env=gym.make('FrozenLake-v0')
 env.render()
 
 while True:
+    state=env.reset()
     key=readchar.readkey()
     if key not in arrow_keys.keys():
         print("nah")
         break
 
     action = arrow_keys[key]
-    state , reward , done , info = env.step(action)
+    new_state , reward , done , info = env.step(action)
     env.render()#render after action.
-    print("state: ",state,"Action: ",action,"Reward: ",reward,
+    print("state: ",new_state,"Action: ",action,"Reward: ",reward,
             "Info: ",info)
 
     if done:
